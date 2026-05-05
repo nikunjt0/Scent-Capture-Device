@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ComponentDescriptions from "./_components/ComponentDescriptions";
 import HorizontalDeviceDiagram from "./_components/HorizontalDeviceDiagram";
@@ -210,8 +211,14 @@ export default function HomePage() {
       {/* Header is absolute (not fixed) so the logo stays anchored to the
           document top and scrolls up out of view as the user begins moving
           through the diagram. */}
-      <header className="absolute inset-x-0 top-0 z-30 flex w-screen items-start p-6">
+      <header className="absolute inset-x-0 top-0 z-30 flex w-screen items-start justify-between p-6">
         <Logo />
+        <Link
+          href="/spec"
+          className="mt-3 font-die-grotesk text-sm tracking-[0.2em] text-black/55 transition-colors hover:text-black"
+        >
+          DETAILED TECH SPEC →
+        </Link>
       </header>
 
       <section ref={sectionRef} className="relative">
