@@ -14,7 +14,7 @@ const CHARS = [
   "/scent-characters/_.jpeg",
 ].map(encodeURI);
 
-const FOOTER_IMG = encodeURI("/ChatGPT Image May 5, 2026, 04_27_10 PM.png");
+const FOOTER_IMG = encodeURI("/ChatGPT Image May 5, 2026, 05_36_59 PM.png");
 
 const NUMBER_LABEL = "font-mono text-xs tracking-[0.3em] text-black/40";
 const HEADING =
