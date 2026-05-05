@@ -21,20 +21,14 @@ function RotatingModel({
 
   useFrame((_, delta) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x += delta * 0.15;
-      meshRef.current.rotation.y += delta * 0.25;
-      meshRef.current.rotation.z += delta * 0.1;
+      meshRef.current.rotation.y += delta * 0.4;
     }
   });
 
   return (
     <Center>
-      <mesh
-        ref={meshRef}
-        geometry={geometry}
-        scale={scale}
-        rotation={initialRotation}
-      >
+      <group rotation={[initialRotation[0], 0, initialRotation[2]]}>
+        <mesh ref={meshRef} geometry={geometry} scale={scale}>
         <meshPhysicalMaterial
           color="#c0c0c0"
           metalness={0.95}
@@ -43,7 +37,8 @@ function RotatingModel({
           clearcoatRoughness={0.1}
           envMapIntensity={1.2}
         />
-      </mesh>
+        </mesh>
+      </group>
     </Center>
   );
 }
@@ -56,6 +51,8 @@ interface Props {
   scale?: number;
   /** Initial Euler rotation [x, y, z] in radians before the auto-spin. */
   initialRotation?: [number, number, number];
+  /** Camera distance on the z axis — defaults to 120. */
+  camZ?: number;
 }
 
 export default function StlViewer({
@@ -63,11 +60,12 @@ export default function StlViewer({
   bgColor = "transparent",
   scale = 1,
   initialRotation = [0, 0, 0],
+  camZ = 120,
 }: Props) {
   return (
     <div className="absolute inset-0 h-full w-full">
       <Canvas
-        camera={{ position: [0, 0, 120], fov: 45 }}
+        camera={{ position: [0, 0, camZ], fov: 45 }}
         style={{ background: bgColor }}
       >
         <ambientLight intensity={0.5} />

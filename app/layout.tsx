@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import "lenis/dist/lenis.css";
+import ScrollReset from "./_components/ScrollReset";
 import SmoothScroll from "./_components/SmoothScroll";
 
 const geistSans = Geist({
@@ -39,6 +40,7 @@ export default function RootLayout({
     >
       <body className="min-h-full">
         <SmoothScroll />
+        <ScrollReset />
         {children}
       </body>
     </html>

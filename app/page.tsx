@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import ComponentDescriptions from "./_components/ComponentDescriptions";
 import HorizontalDeviceDiagram from "./_components/HorizontalDeviceDiagram";
+import { getLenis } from "./_components/lenisInstance";
 import WaveCrystallization from "./_components/WaveCrystallization";
 
 function Logo() {
@@ -171,20 +172,37 @@ export default function HomePage() {
 
   // When arriving from /industrial or /personal via ← Back (#choose),
   // jump straight to the phase-3 scroll position so the two panes are
-  // fully visible.
+  // fully visible. We retry a few frames because the SVG needs to render
+  // before scrollWidth is accurate.
   useEffect(() => {
     if (window.location.hash !== "#choose") return;
-    const inner = innerRef.current;
-    if (!inner) return;
-    const innerW = inner.scrollWidth;
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
-    const phase1Dist = Math.max(0, innerW - winW);
-    const phase2Dist = PHASE2_VH * winH;
-    const phase3Dist = PHASE3_VH * winH;
-    window.scrollTo(0, phase1Dist + phase2Dist + phase3Dist);
-    // Clean up the hash so a manual refresh doesn't re-trigger.
-    history.replaceState(null, "", "/");
+
+    let attempts = 0;
+    function jump() {
+      const inner = innerRef.current;
+      if (!inner) {
+        if (attempts++ < 10) requestAnimationFrame(jump);
+        return;
+      }
+      const innerW = inner.scrollWidth;
+      const winW = window.innerWidth;
+      const winH = window.innerHeight;
+      const phase1Dist = Math.max(0, innerW - winW);
+      const phase2Dist = PHASE2_VH * winH;
+      const phase3Dist = PHASE3_VH * winH;
+      const target = phase1Dist + phase2Dist + phase3Dist;
+
+      // Force both Lenis AND native scroll to the target.
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.stop();
+        lenis.scrollTo(target, { immediate: true, force: true });
+        lenis.start();
+      }
+      window.scrollTo(0, target);
+      history.replaceState(null, "", "/");
+    }
+    requestAnimationFrame(jump);
   }, []);
 
   return (
