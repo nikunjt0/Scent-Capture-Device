@@ -24,10 +24,10 @@ function Logo() {
           </tspan>
           <tspan dx="-4.5">CENTIA</tspan>
         </text>
-        <rect className="logo-block" y="12.39" width="62.5" height="81.17" />
+        <rect className="logo-block" y="16.39" width="62.5" height="81.17" />
         <polygon
           className="logo-triangle"
-          points="31.25 87.31 43.75 62.31 56.25 87.31 31.25 87.31"
+          points="31.25 91.31 43.75 66.31 56.25 91.31 31.25 91.31"
         />
       </g>
     </svg>
