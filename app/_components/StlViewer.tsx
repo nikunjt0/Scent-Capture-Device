@@ -65,7 +65,7 @@ export default function StlViewer({
   initialRotation = [0, 0, 0],
 }: Props) {
   return (
-    <div className="h-[60vh] w-full">
+    <div className="absolute inset-0 h-full w-full">
       <Canvas
         camera={{ position: [0, 0, 120], fov: 45 }}
         style={{ background: bgColor }}
