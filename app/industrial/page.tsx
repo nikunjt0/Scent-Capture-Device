@@ -143,8 +143,8 @@ export default function IndustrialPage() {
                 <tspan x="0" y="0">S</tspan>
                 <tspan dx="-4.5">CENTIA</tspan>
               </text>
-              <rect fill="#ffffff" y="12.39" width="62.5" height="81.17" />
-              <polygon fill="#000000" points="31.25 87.31 43.75 62.31 56.25 87.31 31.25 87.31" />
+              <rect fill="#ffffff" y="16.39" width="62.5" height="81.17" />
+              <polygon fill="#000000" points="31.25 91.31 43.75 66.31 56.25 91.31 31.25 91.31" />
             </g>
           </svg>
         </div>
