@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
   --foreground: #171717;
+  --logo-black: #000000;
 }
 
 @theme inline {
@@ -10,17 +12,41 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-die-grotesk: var(--font-die-grotesk), "Helvetica Neue", Arial,
+    sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+html,
 body {
-  background: var(--background);
+  background: #ffffff;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Scentia logo styles — adapted from scentia/app/globals.css */
+.logo-svg {
+  width: 192px;
+  height: auto;
+  overflow: visible;
+}
+
+.logo-wordmark,
+.logo-block {
+  fill: var(--logo-black);
+}
+
+.logo-wordmark {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 108.16px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.logo-triangle {
+  fill: #ffffff;
+  transition: fill 180ms ease;
+}
+
+.logo-svg:hover .logo-triangle {
+  fill: var(--logo-black);
 }
